@@ -79,7 +79,7 @@ console.log(targetURL)
   return (
     <div>
       <div className='cuisine-title'>
-<p>Restaurants</p>
+<p>Restaurants with {cuisine} foods</p>
 <input className='input-rest'
   type="text"
   onChange={(e) => handleSearch(e.target.value)}
