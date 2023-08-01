@@ -1,3 +1,4 @@
+It is a food delivery application made using React-typescript.
 
 ![home page](image.png)
 
@@ -7,8 +8,6 @@
 
 ![select restaurant](image-3.png)
 
-![specific search](image-4.png)
+![menu](image-4.png)
 
-![menu](image-5.png)
-
-![cart](image-6.png)
+![cart](image-5.png)

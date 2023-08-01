@@ -27,7 +27,6 @@ export function RestaurantList() {
 
 
 console.log("Cuisine",cuisine)
-// const targetURL = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${latitude}&lng=${longitude}&collection=83647&offset=0&pageType=COLLECTION&type=rcv2&page_type=DESKTOP_COLLECTION_LISTING`;
 const targetURL = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${latitude}&lng=${longitude}&str=${cuisine}&trackingId=0bea61db-fb94-0ff9-10cb-c9d9248fcac2&submitAction=ENTER&queryUniqueId=5815ddb6-7394-1e06-7743-fa4e0d107816`;
 const proxyURL = 'https://api.allorigins.win/raw?url=';
 const finalURL = proxyURL + encodeURIComponent(targetURL);

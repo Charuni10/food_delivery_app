@@ -101,9 +101,10 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
         <div className="scroll-button left" onClick={() => scroll(-1)}>
           &lt;
         </div>
-        <Link to="/menu" className="card-container">
+       <div  className="card-container">
           {restaurants.map((restaurant: Restaurant, index: number) => (
             <div className="card" key={index}>
+               <Link to={`/menu/${encodeURIComponent(restaurant.id)}?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`}  >
               <h3>{restaurant.name}</h3>
               <p>Avg. Rating: {restaurant.avgRatingString}</p>
               <p>Cost for Two: {restaurant.costForTwo}</p>
@@ -111,9 +112,10 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
               <p>Area: {restaurant.areaName}</p>
               <p>Cuisines: {restaurant.cuisines.join(', ')}</p>
               <p>Total Ratings: {restaurant.totalRatingsString}</p>
+              </Link>
             </div>
           ))}
-        </Link>
+       </div>
         <div className="scroll-button right" onClick={() => scroll(1)}>
           &gt;
         </div>

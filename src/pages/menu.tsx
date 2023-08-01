@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { generateRandomMenuData } from "../components/menuData";
 import "../static/menu.css";
 import Modal from "react-modal";
 import { Header } from "../components/header";
