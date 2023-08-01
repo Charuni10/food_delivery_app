@@ -1,0 +1,183 @@
+
+.card-container {
+    display: flex;
+    overflow-x: auto; 
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    flex-wrap: nowrap; 
+    
+  }
+  
+  .card {
+    width: 300px; 
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+  }
+  .card:hover {
+    background-color: #eaf2fe;
+    transform: scale(1.05); 
+  }
+  
+  .card h3 {
+    margin-top: 0;
+  }
+  .card-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+
+
+.scroll-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    gap: 1rem;
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(90deg, #4d84e2, #5995fd);
+    
+  }
+  
+  .scroll-button {
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: #fff;
+  }
+  
+  .scroll-button:hover {
+    background-color: #999;
+  }
+  
+  .left {
+    position: absolute;
+    left: 0;
+  }
+  
+  .right {
+    position: absolute;
+    right: 0;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #4d84e2, #5995fd);
+    padding-bottom: 35px;
+  }
+  
+  .card-c {
+    padding: 15px;
+    text-align: center;
+    cursor:pointer;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+    color: #333;
+    text-decoration: none;
+  }
+  .card-c:hover {
+    background-color: #eaf2fe; 
+    transform: scale(1.05); 
+    text-decoration: none;
+  }
+  
+  .card-c img {
+    max-width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+
+  .card-container-city {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+  margin: 20px;
+  margin-bottom: 30px;
+  }
+  
+  .card-city {
+    flex: 0 0 calc(25% - 16px);
+    max-width: calc(25% - 16px);
+    margin: 8px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .card-content {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .card-city:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .restp{
+    background-color: #4d84e2;
+    margin: 0;
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .resp p{
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 27px;
+  }
+
+  .text-fam{
+    padding-left: 40px;
+    font-weight: bold;
+    font-size: 27px;
+    text-align: left;
+    padding-top: 65px;
+  }
+
+
+  .cuisine-title p{
+    padding-left: 40px;
+    font-weight: bold;
+    font-size: 27px;
+    text-align: left;
+    padding-top: 15px;
+  }
+
+  .input-rest{
+    margin:20px;
+    padding: 10px;
+    margin-left: 40px;
+    padding-right: 50px;
+    margin-bottom: 30px;
+  }

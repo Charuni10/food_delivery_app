@@ -1,0 +1,39 @@
+
+.container-about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 70px;
+  }
+  
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 30px;
+    margin-bottom: 15px;
+  }
+  
+  ul li {
+    list-style-type: initial;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
