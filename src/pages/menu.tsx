@@ -3,7 +3,7 @@ import "../static/menu.css";
 import Modal from "react-modal";
 import { Header } from "../components/header";
 import { useLocation, useParams } from "react-router";
-
+import { Restaurant } from "../components/cuisinesearch";
 
 export interface MenuItem {
   title: string;
@@ -39,6 +39,7 @@ console.log(latParam,longParam)
 
 console.log(restId,"YEs")
 const [totalCost, setTotalCost] = useState<number>(0);
+const [restaurants, setRestaurants] = useState<Restaurant | undefined>(undefined);
 
   const [menu, setMenu] = useState<MenuItem[]>([]);
   const [cartItems, setCartItems] = useState<MenuItem[]>([]);
@@ -58,6 +59,21 @@ const [totalCost, setTotalCost] = useState<number>(0);
   
       const data = await response.json();
       console.log(data);
+      const rest_details=data.data.cards[0].card.card.info;
+      console.log(rest_details);
+      const data_rest: Restaurant = {
+        id: rest_details.id,
+        name: rest_details.name,
+        avgRatingString: rest_details.avgRatingString,
+        costForTwo: rest_details.costForTwo,
+        locality: rest_details.locality,
+        areaName: rest_details.areaName,
+        cuisines: rest_details.cuisines,
+        totalRatingsString: rest_details.totalRatingsString,
+      };
+            setRestaurants(data_rest);
+
+    
       const menuItems: MenuItem[] = [];
       const datares = data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
       // console.log(datares);
@@ -94,6 +110,8 @@ const [totalCost, setTotalCost] = useState<number>(0);
 
       }
       setMenu(menuItems);
+     
+      
     }
     }catch (error) {
       console.error('Error fetching data:', error);
@@ -135,6 +153,19 @@ const [totalCost, setTotalCost] = useState<number>(0);
     <div className="menu-scroll">
       <p  className="menu-title">Menu</p>
       <button className="btn" onClick={handleToggleCart}>View Cart</button>
+      </div>
+      <div className="rest-details">
+      {restaurants && (
+          <>
+            <h3>{restaurants.name}</h3>
+            <p>Avg. Rating: {restaurants.avgRatingString}</p>
+            <p>Cost for Two: {restaurants.costForTwo}</p>
+            <p>Locality: {restaurants.locality}</p>
+            <p>Area: {restaurants.areaName}</p>
+            <p>Cuisines: {restaurants.cuisines.join(', ')}</p>
+            <p>Total Ratings: {restaurants.totalRatingsString}</p>
+          </>
+        )}
       </div>
       <div className="menu-container">
 
