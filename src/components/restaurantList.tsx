@@ -1,19 +1,35 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+// imports
+import  { Dispatch, useEffect, useState } from 'react';
 import { Restaurant } from './cuisinesearch';
-import '../static/restaurant.css';
 import { Link, useParams } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect} from 'react-redux';
 import { fetchRestaurants } from '../redux-store/restaurantAction';
 import { useLocation } from 'react-router-dom';
 import { RestaurantActionTypes } from '../redux-store/restaurantAction';
+import '../static/restaurant.css';
 
-
+// type declaration
+interface RootState {
+  filteredRestaurants: any;
+  restaurant: {
+    restaurantArray: Restaurant[];
+    filteredRestaurants: Restaurant[];
+  };
+}
 
 export function RestaurantList() {
- const location=useLocation();
+
+
+  // declare states
+  const location=useLocation();
   const { cuisineStr } = useParams();
   const [cuisine, setCuisine] = useState('');
+  const queryParams = new URLSearchParams(location.search);
+  const latitude = queryParams.get('latitude') || 0;
+  const longitude = queryParams.get('longitude') || 0;
+  const [restaurantArray, setRestaurantArray] = useState<Restaurant[]>([]);
 
+// get the cuisine name from the Link(Render)
   useEffect(() => {
     if(cuisineStr){
     const decodedCuisineStr = decodeURIComponent(cuisineStr);
@@ -21,17 +37,13 @@ export function RestaurantList() {
     }
   }, [cuisineStr]);
 
-  const queryParams = new URLSearchParams(location.search);
-  const latitude = queryParams.get('latitude') || 0;
-  const longitude = queryParams.get('longitude') || 0;
+  // fetch API with 
+  const targetURL = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${latitude}&lng=${longitude}&str=${cuisine}&trackingId=0bea61db-fb94-0ff9-10cb-c9d9248fcac2&submitAction=ENTER&queryUniqueId=5815ddb6-7394-1e06-7743-fa4e0d107816`;
+  const proxyURL = 'https://api.allorigins.win/raw?url=';
+  const finalURL = proxyURL + encodeURIComponent(targetURL);
 
-
-console.log("Cuisine",cuisine)
-const targetURL = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${latitude}&lng=${longitude}&str=${cuisine}&trackingId=0bea61db-fb94-0ff9-10cb-c9d9248fcac2&submitAction=ENTER&queryUniqueId=5815ddb6-7394-1e06-7743-fa4e0d107816`;
-const proxyURL = 'https://api.allorigins.win/raw?url=';
-const finalURL = proxyURL + encodeURIComponent(targetURL);
-  const [restaurantArray, setRestaurantArray] = useState<Restaurant[]>([]);
 console.log(targetURL)
+// fetching the restaurant data using use effect and storing it using redux
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
@@ -64,6 +76,8 @@ console.log(targetURL)
     };
     fetchRestaurants();
   }, [cuisine]);
+
+  // search for specific restaurants
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
 
@@ -79,11 +93,13 @@ console.log(targetURL)
     <div>
       <div className='cuisine-title'>
 <p>Restaurants with {cuisine} foods</p>
+{/* search grid */}
 <input className='input-rest'
   type="text"
   onChange={(e) => handleSearch(e.target.value)}
   placeholder="Search for restaurants"
 />
+{/* restaurant cards */}
 
       </div>
       <div className="grid-container">
@@ -106,14 +122,8 @@ console.log(targetURL)
     </div>
   );
 }
+// redux connectivity
 
-interface RootState {
-  filteredRestaurants: any;
-  restaurant: {
-    restaurantArray: Restaurant[];
-    filteredRestaurants: Restaurant[];
-  };
-}
 
 
 

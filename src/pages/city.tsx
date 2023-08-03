@@ -1,3 +1,4 @@
+// imports
 import { useParams } from "react-router";
 import { Header } from "../components/header";
 import RestaurantSearch, { Cuisine } from "../components/cuisinesearch";
@@ -6,9 +7,11 @@ import axios from "axios";
 import { Footer } from "../components/footer";
 
 export function City() {
+  // declare states
   const { searchQuery } = useParams();
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
 
+  // get the city's latitude and longitude using the HERE API
   useEffect(() => {
     console.log('Search Query in Next Page:', searchQuery);
 
@@ -46,9 +49,11 @@ export function City() {
     }
   }, [searchQuery]);
 
+
   return (
     <div>
       <Header />
+      {/* route to the components with the latitude and longitude */}
       <RestaurantSearch  coordinates={coordinates}/>
       <Cuisine coordinates={coordinates}/>
       <Footer/>

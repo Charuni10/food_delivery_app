@@ -1,3 +1,4 @@
+// imports
 import { Header } from "../components/header";
 import { CardHome } from "../components/card";
 import '../static/card.css'
@@ -7,7 +8,7 @@ import { Footer } from "../components/footer";
 
 export function Home() {
 
-
+// home page
   return (
     <div>
       <Header />

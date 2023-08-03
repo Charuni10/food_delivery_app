@@ -1,6 +1,8 @@
+// imports
 import '../static/login.css'
 import { FaGoogle } from "react-icons/fa";
 
+// social media login component
 export function SocialLogin(){
     return(
         <div className="social-media">

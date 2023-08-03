@@ -1,6 +1,8 @@
-import React, { useState,useEffect } from "react";
+// imports
+import  { useState,useEffect } from "react";
 import axios from "axios";
 
+//declare types
 export type Coordinates = {
   latitude: number;
   longitude: number;
@@ -17,11 +19,13 @@ type LocationProps = {
   onLocationSelect: (location: Coordinates, address: Address) => void;
 };
 
+
 function Location({ onLocationSelect }: LocationProps) {
+  // declare states
   const [location, setLocation] = useState<Coordinates | null>(null);
   const [address, setAddress] = useState<Address | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+// use HERE Maps API to get longitude and latitude of the user
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -35,7 +39,7 @@ function Location({ onLocationSelect }: LocationProps) {
       }
     );
   };
-
+// Using the API to get the total address of the user when they click current location
   const getAddress = async () => {
     if (location) {
       try {
@@ -44,7 +48,7 @@ function Location({ onLocationSelect }: LocationProps) {
         );
   
         console.log("Response:", response.data);
-  
+  // getting the city,country, postal code and address using the latitude and longitude
         const { items } = response.data;
         if (items && items.length > 0) {
           const { title, address,country } = items[0];
@@ -68,6 +72,7 @@ useEffect(()=>{
   getAddress()
 },[location]);
 
+// sends the location to the page
 const handleLocationSelect = () => {
   if (location && address) {
     onLocationSelect(location, address);
@@ -85,8 +90,6 @@ const handleLocationSelect = () => {
       </button>
       </div>
       ) 
-
-  
 }
 
 export default Location;

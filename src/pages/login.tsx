@@ -1,30 +1,36 @@
+// imports
 import  { useState } from "react";
-import { SocialLogin } from "../components/socialmedia";
-import { AiOutlineUser } from "react-icons/ai";
-import{ RiLockPasswordLine } from "react-icons/ri";
-import{ AiOutlineMail} from "react-icons/ai";
 import '../static/login.css';
 import login from '../images/login.svg';
 import signup from '../images/signup.svg';
 import { useNavigate } from "react-router";
+// importing icons
+import { SocialLogin } from "../components/socialmedia";
+import { AiOutlineUser } from "react-icons/ai";
+import{ RiLockPasswordLine } from "react-icons/ri";
+import{ AiOutlineMail} from "react-icons/ai";
 
 
 
 
 export function Login(){
+// declare states
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const Username = "admin";
-const Password = "password";
- 
+    const Password = "password";
     const [isSignUp,setIsSignUP] = useState<boolean>(false);
+
+    // function to change the login to signup and vise versa
     const clickSignUp = () =>{
         setIsSignUP(true)
     };
     const clickSignIn = () =>{
         setIsSignUP(false)
     };
+
+    // authentication of login credentials
     const handleLogin = () => {
         if (username === Username && password === Password) {
           
@@ -36,7 +42,7 @@ const Password = "password";
     
 
     return(
-
+// login and signup 
         <div className={`container ${isSignUp ? "sign-up-mode" : ""}`}>
             
         <div className="forms-container">

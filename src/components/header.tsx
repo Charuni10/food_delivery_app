@@ -1,8 +1,10 @@
+// imports
 import { Link } from "react-router-dom";
 import "../static/header.css";
 
 export function Header() {
   return (
+    // created a fixed header which routes to multiple pages
     <div className="header-container">
       <nav className="navbar">
       <Link className="nav-link" to="/home">

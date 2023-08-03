@@ -1,17 +1,20 @@
+// imports
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../static/restaurant.css";
+
+// import images for cuisines
 import pizza from "../images/pizza.jpg";
 import chinese from "../images/chinese.jpg";
 import northIndian from "../images/north.jpg";
 import pureVeg from "../images/veg.jpg";
 import cakes from "../images/cake.jpg";
-import asian from "../images/asian.jpg"
+import asian from "../images/asian.jpg";
 
+// defined types
 interface RestaurantSearchProps {
   coordinates: { latitude: number; longitude: number; };
 }
-
 
 export type Restaurant = {
   id: string;
@@ -25,7 +28,7 @@ export type Restaurant = {
 };
 
 
-
+// array for cuisine
 const cuisineCollection = [
   { name: 'Chinese', str: 'Chinese' ,img:chinese},
   { name: 'North Indian', str: 'North%20Indian' ,img:northIndian},
@@ -35,18 +38,21 @@ const cuisineCollection = [
   {name:'Asian',str:'Asian',img:asian}
 ];
 
-
+//function
 const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
+ //defining the API link with fetching the latitude and longitude for each cities
+  const targetURL = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${coordinates.latitude}&lng=${coordinates.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
+  const proxyURL = 'https://api.allorigins.win/raw?url=';
+  const finalURL = proxyURL + encodeURIComponent(targetURL);
+  // console.log(targetURL)
 
+  // defined state
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
- const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
- 
 
   useEffect(() => {
-    const targetURL = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${coordinates.latitude}&lng=${coordinates.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
-    const proxyURL = 'https://api.allorigins.win/raw?url=';
-    const finalURL = proxyURL + encodeURIComponent(targetURL);
-    console.log(targetURL)
+  //  fetching the data about famous restaurants
     
     const fetchData = async () => {
       try {
@@ -56,13 +62,12 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
         }
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         const famousRestaurant = data.data.cards[5].card.card.gridElements.infoWithStyle.restaurants;
-        console.log(famousRestaurant );
-        const cityRestaurant = data.data.cards[8];
-        console.log(cityRestaurant);
+        // console.log(famousRestaurant );
+        // add the restaurant list as an array
         setRestaurants(
-            famousRestaurant .map((restaurant: any) => ({
+            famousRestaurant.map((restaurant: any) => ({
             id: restaurant.info.id,
             name: restaurant.info.name,
             avgRatingString: restaurant.info.avgRatingString,
@@ -79,10 +84,9 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
     };
 
     fetchData();
-  }, [coordinates.latitude, coordinates.longitude]);
+  }, [finalURL,coordinates.latitude, coordinates.longitude]);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
+// this function is to scroll the cards of restaurant list and moves the cards forward and backwards
   const scroll = (step: number) => {
     const container = document.querySelector('.card-container');
     if (container) {
@@ -101,9 +105,11 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
         <div className="scroll-button left" onClick={() => scroll(-1)}>
           &lt;
         </div>
+        {/* restaurant list displayed as cards*/}
        <div  className="card-container">
           {restaurants.map((restaurant: Restaurant, index: number) => (
             <div className="card" key={index}>
+              {/* renders the next page(menu) and also sends the restaurant id, latitude and longitude */}
                <Link to={`/menu/${encodeURIComponent(restaurant.id)}?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`}  >
               <h3>{restaurant.name}</h3>
               <p>Avg. Rating: {restaurant.avgRatingString}</p>
@@ -126,16 +132,15 @@ const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
 
 export default RestaurantSearch;
 
+// get the list of cuisines
 export const Cuisine : React.FC<RestaurantSearchProps> = ({ coordinates }) => {
-
-
-
   return (
     <div>
       <div className='cuisine-title'>
       <p>Cuisine</p>
       </div>
       <div className="grid-container">
+        {/* view the list of cuisines and render the restaurant list page based on the cuisines */}
         {cuisineCollection.map((cuisine, index) => (
           <Link to={`/restaurantList/${encodeURIComponent(cuisine.str)}?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`} key={index} className="card-c">
           <img src={cuisine.img} alt={cuisine.name} />

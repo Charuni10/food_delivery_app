@@ -1,5 +1,7 @@
+// import css
 import "../static/header.css";
 
+//display footer
 export function Footer() {
     return (
       <div className="footer-container">

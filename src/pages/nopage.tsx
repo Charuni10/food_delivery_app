@@ -1,6 +1,7 @@
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 
+// this opens when no page exists
 export function NoPage() {
   return (
     <div>

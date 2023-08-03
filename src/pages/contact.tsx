@@ -1,8 +1,10 @@
+// imports
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 
 export function Contact() {
     return (
+      // basic contact information
       <><div >
         <Header />
       <div className="container-about">

@@ -1,8 +1,11 @@
+// imports
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import "../static/about.css";
 
+
 export function About() {
+  // basic details about the application
     return (
       <div >
         <Header />
